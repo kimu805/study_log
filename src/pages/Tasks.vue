@@ -2,6 +2,7 @@
   import TaskForm from '@/components/TaskForm.vue';
 import TaskList from '@/components/TaskList.vue';
   import { useTasksStore } from '@/stores/tasks';
+import Stats from '@/views/Stats.vue';
 
   const tasksStore = useTasksStore()
   const toggleTask = (id) => {
@@ -21,6 +22,8 @@ import TaskList from '@/components/TaskList.vue';
 
     <h2>完了済み</h2>
     <TaskList :tasks="tasksStore.completedTasks" @toggle="toggleTask" />
+
+    <Stats />
   </div>
   
 </template>

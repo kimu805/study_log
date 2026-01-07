@@ -73,6 +73,25 @@ export const useTasksStore = defineStore("tasks", () => {
     return tasks.value = tasks.value.filter(task => task.id !== id)
   }
 
+  const totalCount = computed(() => {
+    return tasks.value.length
+  })
+
+  const completedCount = computed(() => {
+    return tasks.value.filter(task => task.isCompleted).length
+  })
+
+  const activeCount = computed(() => {
+    return tasks.value.filter(task => !task.isCompleted).length
+  })
+
+  const completionRate = computed(() => {
+    if (totalCount.value === 0) return 0
+    return Math.round(
+      (completedCount.value / totalCount.value) * 100
+    )
+  })
+
   return {
     tasks,
     toggleComplete,
@@ -80,6 +99,10 @@ export const useTasksStore = defineStore("tasks", () => {
     activeTasks,
     addTask,
     updateTaskTitle,
-    removeTask
+    removeTask,
+    totalCount,
+    completedCount,
+    activeCount,
+    completionRate
   }
 })

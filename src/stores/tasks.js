@@ -32,6 +32,19 @@ export const useTasksStore = defineStore("tasks", () => {
     ]
   }
 
+  const filter = ref("all")
+
+  const filteredTasks = computed(() => {
+    switch (filter.value) {
+      case "completed":
+        return tasks.value.filter(task => task.isCompleted)
+      case "incomplete":
+        return tasks.value.filter(task => !task.isCompleted)
+      default: 
+        return tasks.value
+    }
+  })
+
   watch(tasks, (newTasks) => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(newTasks))
   }, { deep: true })
@@ -103,6 +116,8 @@ export const useTasksStore = defineStore("tasks", () => {
     totalCount,
     completedCount,
     activeCount,
-    completionRate
+    completionRate,
+    filter, 
+    filteredTasks
   }
 })

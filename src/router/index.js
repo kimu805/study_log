@@ -2,6 +2,7 @@ import Dashboard from '@/pages/Dashboard.vue'
 import TaskDetail from '@/pages/TaskDetail.vue'
 import Tasks from '@/pages/Tasks.vue'
 import Stats from '@/views/Stats.vue'
+import TaskList from '@/views/TaskList.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
@@ -9,16 +10,16 @@ const router = createRouter({
   routes: [
     {
       path: "/", 
-      redirect: "/dashboard"
-    },
-    {
-      path: "/dashboard",
-      name: "dashboard",
       component: Dashboard
     },
     {
-      path: "/tasks",
+      path: "/dashboard",
       name: "tasks",
+      component: TaskList
+    },
+    {
+      path: "/tasks",
+      name: "tasksManager",
       component: Tasks
     },
     {

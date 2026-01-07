@@ -11,19 +11,31 @@ import Stats from '@/views/Stats.vue';
 </script>
 
 <template>
-  <div>
-    <h1>Tasks</h1>
-    <RouterLink :to="{ name: 'dashboard' }">Back to Dashboard</RouterLink>
+  <div class="main">
+    <div class="tasks">
+      <h1>Tasks Manager</h1>
+      <RouterLink to="/">Back to Dashboard</RouterLink> |
+      <RouterLink :to="{ name: 'tasks' }">Back to Tasks</RouterLink>
 
-    <TaskForm />
+      <TaskForm />
 
-    <h2>未完了</h2>
-    <TaskList :tasks="tasksStore.activeTasks" @toggle="toggleTask" />
+      <h2>未完了</h2>
+      <TaskList :tasks="tasksStore.activeTasks" @toggle="toggleTask" />
 
-    <h2>完了済み</h2>
-    <TaskList :tasks="tasksStore.completedTasks" @toggle="toggleTask" />
+      <h2>完了済み</h2>
+      <TaskList :tasks="tasksStore.completedTasks" @toggle="toggleTask" />
+    </div>
 
-    <Stats />
+    <div class="stats">
+      <Stats />
+    </div>
   </div>
   
 </template>
+
+<style scoped>
+  .main {
+    display: flex;
+    justify-content: space-between;
+  }
+</style>

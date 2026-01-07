@@ -50,11 +50,20 @@ export const useTasksStore = defineStore("tasks", () => {
     return tasks.value.filter(task => !task.isCompleted)
   })
 
+  const updateTaskTitle = (id, newTitle) => {
+    if (!newTitle) return
+    const task = tasks.value.find(task => task.id === id)
+    if (task) {
+      task.title = newTitle
+    }
+  }
+
   return {
     tasks,
     toggleComplete,
     completedTasks,
     activeTasks,
-    addTask
+    addTask,
+    updateTaskTitle
   }
 })

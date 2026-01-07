@@ -1,9 +1,10 @@
 <script setup>
-  import { useTasksStore } from '@/stores/tasks';
+import { useTasksStore } from '@/stores/tasks';
 import { computed, ref, watch } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
   const route = useRoute()
+  const router = useRouter()
   const tasksStore = useTasksStore()
 
   const taskId = route.params.id
@@ -24,6 +25,15 @@ import { useRoute } from 'vue-router';
     tasksStore.updateTaskTitle(taskId, editTitle.value)
     isEditing.value = false
   }
+
+  const onDelete = () => {
+    if(!task.value) return 
+
+    if (confirm("このタスクを削除しますか？")) {
+      tasksStore.removeTask(task.value.id)
+      router.push("/tasks")
+    }
+  }
 </script>
 
 <template>
@@ -38,6 +48,7 @@ import { useRoute } from 'vue-router';
           {{ task.isCompleted ? "完了済み" : "未完了" }}
         </p>
         <button @click="isEditing = true">Edit</button>
+        <button @click="onDelete">Delete</button>
       </div>
 
       <div v-else>
@@ -51,6 +62,6 @@ import { useRoute } from 'vue-router';
       <h2>404 Not Found</h2>
     </div>
 
-    <RouterLink :to="{ name: 'tasks' }">一覧へ戻る</RouterLink>
+    <RouterLink :to="{ name: 'tasks' }">Back to Tasks</RouterLink>
   </div>
 </template>

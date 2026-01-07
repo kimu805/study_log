@@ -1,4 +1,5 @@
 import Dashboard from '@/pages/Dashboard.vue'
+import TaskDetail from '@/pages/TaskDetail.vue'
 import Tasks from '@/pages/Tasks.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
@@ -18,6 +19,11 @@ const router = createRouter({
       path: "/tasks",
       name: "tasks",
       component: Tasks
+    },
+    {
+      path: "/tasks/:id",
+      name: "taskDetail",
+      component: TaskDetail
     }
   ]
 })

@@ -13,7 +13,9 @@
   <li>
     <label>
       <input type="checkbox" :checked="task.isCompleted" @change="emit('toggle', task.id)">
-      {{ task.title }}
+      <RouterLink :to="{ name: 'taskDetail', params: { id: task.id } }">
+        {{ task.title }}
+      </RouterLink>
     </label>
   </li>
 </template>
